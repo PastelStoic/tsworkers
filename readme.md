@@ -1,8 +1,8 @@
-Workerfile is a streamlined way to set up workers for multithreaded programs.
+TSWorkers is a streamlined way to set up workers for multithreaded programs.
 Setting up a worker takes a single line of code, as shown below:
 
 ```ts
-export const createExampleWorker = createWorker(
+export const createExampleWorker = setupWorker(
   import.meta.url,
   self,
   myFunction,
