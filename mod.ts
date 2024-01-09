@@ -1,10 +1,3 @@
-/*
-  The worker function takes an input function and output type.
-  it exports a function that runs the input and returns the output.
-
-  internally, a worker object is created holding a done state
-*/
-
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
