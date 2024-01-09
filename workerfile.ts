@@ -23,14 +23,12 @@ function sleep(ms: number) {
  * @returns
  */
 export function setupWorker<TIn = void, TOut = void>(
-  importurl: string,
-  workerself: unknown,
   code: (input: TIn) => TOut,
   checkDelay = 10,
 ) {
   function create() {
     const worker = new Worker(
-      new URL(importurl).href,
+      new URL(import.meta.url).href,
       {
         type: "module",
       },
@@ -61,15 +59,15 @@ export function setupWorker<TIn = void, TOut = void>(
   }
 
   // @ts-ignore web worker
-  workerself.onmessage = async (evt) => {
+  self.onmessage = async (evt) => {
     const result = code(evt.data);
 
     if (result instanceof Promise) {
       // @ts-ignore web worker
-      workerself.postMessage(await result);
+      self.postMessage(await result);
     } else {
       // @ts-ignore web worker
-      workerself.postMessage(result);
+      self.postMessage(result);
     }
   };
 
